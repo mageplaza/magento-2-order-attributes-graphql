@@ -1,0 +1,82 @@
+
+type Query {
+    MpOrderAttributes(
+        filter: MpOrderAttributesFilterInput @doc(description: "Identifies which order attributes to search for and return.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start with 1")
+    ):MpOrderAttributesOutput @resolver(class: "Mageplaza\\OrderAttributesGraphQl\\Model\\Resolver\\Attributes") @doc(description: "The query searches for order attributes that match the criteria specified in the filter.")
+}
+
+type Mutation {
+    MpOrderAttributesSaveAttributes(input: AttributeInput!): Boolean @resolver(class: "Mageplaza\\OrderAttributesGraphQl\\Model\\Resolver\\SaveAttributes")
+}
+
+input AttributeInput {
+     cart_id: String!,
+     attributes: [AttributeValueInput]!
+}
+
+input AttributeValueInput {
+    attribute_code: String!
+    value: String!
+}
+
+input MpOrderAttributesFilterInput {
+    attribute_id: FilterTypeInput @doc(description: "Attribute Id")
+    attribute_code: FilterTypeInput @doc(description: "Attribute Code")
+    backend_type: FilterTypeInput @doc(description: "Backend Type")
+    frontend_input: FilterTypeInput @doc(description: "Frontend Input")
+    frontend_label: FilterTypeInput @doc(description: "Frontend Label")
+    is_required: FilterTypeInput @doc(description: "Is Required")
+    default_value: FilterTypeInput @doc(description: "Default Value")
+    input_filter: FilterTypeInput @doc(description: "Input Filter")
+    frontend_class: FilterTypeInput @doc(description: "Frontend Class")
+    sort_order: FilterTypeInput @doc(description: "Sort Order")
+    is_used_in_grid: FilterTypeInput @doc(description: "Is Used In Grid")
+    show_in_frontend_order: FilterTypeInput @doc(description: "Show In Frontend Order")
+    field_depend: FilterTypeInput @doc(description: "Field Depend")
+    value_depend: FilterTypeInput @doc(description: "Value Depend")
+    shipping_depend: FilterTypeInput @doc(description: "Shipping Depend")
+    store_id: FilterTypeInput @doc(description: "Store Id")
+    customer_group: FilterTypeInput @doc(description: "Customer Group")
+    position: FilterTypeInput @doc(description: "Position")
+    use_tooltip: FilterTypeInput @doc(description: "Use Tooltip")
+    created_at: FilterTypeInput @doc(description: "Created At")
+    updated_at: FilterTypeInput @doc(description: "Updated At")
+    max_file_size: FilterTypeInput @doc(description: "Max File Size")
+    allow_extensions: FilterTypeInput @doc(description: "Allow Extensions")
+}
+type MpOrderAttributesOutput {
+    total_count: Int @doc(description: "The total number of results returned when a query is applied"),
+    items: [MpOrderAttributes] @doc(description: "Order attributes data is satisfied")
+}
+
+type MpOrderAttributes {
+  attribute_id: Int @doc(description: "Attribute Id")
+  attribute_code: String @doc(description: "Attribute Code")
+  backend_type: String @doc(description: "Backend Type")
+  frontend_input: String @doc(description: "Frontend Input")
+  frontend_label: String @doc(description: "Frontend Label")
+  is_required: Int @doc(description: "Is Required")
+  default_value: String @doc(description: "Default Value")
+  input_filter: String @doc(description: "Input Filter")
+  frontend_class: String @doc(description: "Frontend Class")
+  sort_order: Int @doc(description: "Sort Order")
+  is_used_in_grid: Int @doc(description: "Is Used In Grid")
+  show_in_frontend_order: Int @doc(description: "Show In Frontend Order")
+  field_depend: Int @doc(description: "Field Depend")
+  value_depend: String @doc(description: "Value Depend")
+  shipping_depend: String @doc(description: "Shipping Depend")
+  store_id: String @doc(description: "Store Id")
+  customer_group: String @doc(description: "Customer Group")
+  position: String @doc(description: "Position")
+  use_tooltip: Int @doc(description: "Use Tooltip")
+  additional_data: String @doc(description: "Additional Data")
+  labels: String @doc(description: "Labels")
+  tooltips: String @doc(description: "Tooltips")
+  options: String @doc(description: "Options")
+  created_at: String @doc(description: "Created At")
+  updated_at: String @doc(description: "Updated At")
+  max_file_size: Int @doc(description: "Max File Size")
+  allow_extensions: String @doc(description: "Allow Extensions")
+}
